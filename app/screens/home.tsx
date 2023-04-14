@@ -113,7 +113,6 @@ const HomeScreen = (props: HomeScreenProps) => {
   };
 
   const onClickShoppingElt = (shoppingListElements: ShowShoppingListDto) => {
-    console.log("dans action du clic");
     props.navigation.navigate("ShoppingListContent", {
       shoppingItemId: shoppingListElements.id,
       shoppingItemName: shoppingListElements.name,

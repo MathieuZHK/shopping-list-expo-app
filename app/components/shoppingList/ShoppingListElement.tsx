@@ -2,8 +2,7 @@ import React from "react";
 import { StyleSheet, Text } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import ShowShoppingListDto from "../../core/dtos/shoppingList/ShowShoppingListDto";
-import GmailStyleSwipeableRow from "../common/SwipeableRow";
-import { SwipeListView } from "react-native-swipe-list-view";
+import SwipeableRow from "../common/SwipeableRow";
 
 interface ShoppingListElementProps {
   shoppingListElt: ShowShoppingListDto;
@@ -20,8 +19,18 @@ const ShoppingListElement = (props: ShoppingListElementProps) => {
     shoppingListElt,
   } = props;
 
+
+  const onDeleteAction = () => {
+    onDeleteShoppingElt(shoppingListElt);
+  }
+
+  const onUpdateAction = () => {
+    onUpdateShoppingElt(shoppingListElt);
+  }
+
+
   return (
-    <GmailStyleSwipeableRow>
+    <SwipeableRow onDeleteAction={onDeleteAction} onUpdateAction={onUpdateAction}>
       <RectButton
         style={styles.rectButton}
         onPress={() => {
@@ -29,12 +38,8 @@ const ShoppingListElement = (props: ShoppingListElementProps) => {
         }}
       >
         <Text style={styles.fromText}>{shoppingListElt.name}</Text>
-        <Text numberOfLines={2} style={styles.messageText}>
-          {shoppingListElt.id}
-        </Text>
-        <Text style={styles.dateText}>{shoppingListElt.name}</Text>
       </RectButton>
-    </GmailStyleSwipeableRow>
+    </SwipeableRow>
   );
 };
 

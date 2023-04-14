@@ -5,7 +5,6 @@ import { FlatList } from "react-native-gesture-handler";
 import { Divider, IconButton, Text } from "react-native-paper";
 import { useAuth } from "../../core/context/Auth";
 import ShowShoppingListDto from "../../core/dtos/shoppingList/ShowShoppingListDto";
-import SwipeableRow from "../common/SwipeableRow";
 import ShoppingListElement from "./ShoppingListElement";
 
 interface ShoppingListProps {
@@ -24,7 +23,7 @@ const ShoppingList = (props: ShoppingListProps) => {
 
   return (
     <SafeAreaView className="flex-1">
-      <FlatList
+      <FlashList
         data={props.shoppingListElements}
         ListHeaderComponent={
           <View className="mb-5 p-5 flex flex-row justify-between items-center">
@@ -56,6 +55,7 @@ const ShoppingList = (props: ShoppingListProps) => {
             onClickShoppingElt={props.onClickShoppingElt}
           />
         )}
+        estimatedItemSize={50}
       />
     </SafeAreaView>
   );

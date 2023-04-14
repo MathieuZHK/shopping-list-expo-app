@@ -2,9 +2,10 @@ import { FlashList } from "@shopify/flash-list";
 import React from "react";
 import { SafeAreaView, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { Text } from "react-native-paper";
+import { Divider, IconButton, Text } from "react-native-paper";
 import ShowProductOnShoppingListDto from "../../core/dtos/product/ShowProductOnShoppingListDto";
 import ProductElement from "./ProductElement";
+import { useAuth } from "../../core/context/Auth";
 
 interface ProductListProps {
   productListElements: ShowProductOnShoppingListDto[];
@@ -14,20 +15,21 @@ interface ProductListProps {
 }
 
 const ProductList = (props: ProductListProps) => {
+  const signOut = useAuth();
+  const separator = () => {
+    return <Divider bold={true} />;
+  };
+
   return (
-    <SafeAreaView className="flex flex-col justify-between p-2 h-full">
-      <View className="mb-5">
-        <Text className="font-bold text-center" variant="displaySmall">
-          Product list
-        </Text>
-      </View>
-      <FlatList
+    <SafeAreaView className="flex-1">
+      <FlashList
         data={props.productListElements}
         ListEmptyComponent={
           <View className="flex items-center align-middle">
             <Text>Empty list</Text>
           </View>
         }
+        ItemSeparatorComponent={separator}
         renderItem={({ item }) => (
           <ProductElement
             productOnShoppingList={item}
@@ -36,6 +38,7 @@ const ProductList = (props: ProductListProps) => {
             onDeleteProductElt={props.onDeleteProductElt}
           />
         )}
+        estimatedItemSize={50}
       />
     </SafeAreaView>
   );
